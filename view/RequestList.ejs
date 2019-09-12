@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Request List</title>
+</head>
+<body>
+	<form method="post">
+		<table width="100px" height = "50px" border="1">
+			<h1>Book List</h1>
+			<tr width="100px">
+				<td width="10px" align="center">Sl No</td>
+				<td width="10px" align="center">User Name</td>
+				<td width="10px" align="center">User Email</td>
+				<td width="10px" align="center">User Mobile</td>
+				<td width="10px" align="center">Request Date</td>
+				<td width="10px" align="center">Confermation Date</td>
+				<td width="10px" align="center">Status</td>
+			</tr>
+			<!-- <%
+			var sl = 0;			
+			for(var i=0; i < data.length; i++) { 
+				sl++;
+			%> -->
+				
+					<% 
+					var sl = 0;
+					for(var i=0; i < data[0].dataValues.issues.length; i++) { 
+					sl++;
+					%>
+					<tr width="100px">
+					<td width="10px" align="center"><%=sl%></td>
+					<td width="10px" align="center"><%= data[0].dataValues.issues[i].User.name %></td>
+					<td width="10px" align="center"><%= data[0].dataValues.issues[i].User.email %></td>
+					<td width="10px" align="center"><%= data[0].dataValues.issues[i].User.mobile %></td>
+					<td width="10px" align="center"><%= data[0].dataValues.issues[i].createdAt %></td>
+					<td width="10px" align="center"><%= data[0].dataValues.issues[i].updatedAt %></td>
+					<td width="10px" align="center">						
+						<% if(data[0].dataValues.issues[i].status =='R')
+						{ %>
+												
+							<a href="/bookRequestApproveDetails/<%= data[0].dataValues.issues[i].id %>">Pending</a>
+
+						<% }
+						else if(data[0].dataValues.issues[i].status == 'A')
+						{ %>
+							<a href="/bookRequestConfirmedDetails/<%= data[0].dataValues.issues[i].id %>">Approve</a>
+
+						<% }
+						else if(data[0].dataValues.issues[i].status == 'C')
+						{ %>
+							<a>Confirmed</a>
+
+						<% }
+						else if(data[0].dataValues.issues[i].status == 'D')
+						{ %>
+
+							<a>Book Return Successfully</a>
+
+						<% }
+						else if(data[0].dataValues.issues[i].status == 'I')
+						{ %>
+
+							<a>Rejected By user</a>
+
+						<% } %>
+					</td>
+					
+					<tr>
+				    <% }%>
+							
+			<% } %>
+			
+		</table>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+

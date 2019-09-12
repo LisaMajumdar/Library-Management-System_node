@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+</head>
+<body>
+	<form method="post">
+		<table width="100px" height = "100px">
+			<h1>Profile View!!</h1>
+			<tr>
+				<label>Name : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><%= data.name %></label>
+			</tr><br>
+			<tr>
+				<label>Email : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><%= data.email %></label>
+			</tr><br>			
+			<tr>
+				<label>Mobile : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><%= data.mobile %></label>
+			</tr><br>
+			<tr>
+				<label>Image : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><img src="uploads/userimage/<%= data.image %>" height = "100px" weidth = "150px"></label>
+			</tr><br>
+			<% if(data.type == 'admin'){ %>
+				<tr>					
+					<label><a href="book/addBookView" > Add New Book </a> &nbsp;&nbsp;&nbsp;
+					<label><a href="book/bookList" > Show Assign Book List </a>
+				</tr><br>
+				<tr>					
+					<label><a href="book/addBookView" > Book Request </a> &nbsp;&nbsp;&nbsp;
+					<!-- <label><a href="book/bookList" > Show Assign Book List </a> -->
+				</tr><br>
+			<% }else{ %>
+				<tr>					
+					<label><a href="book/bookList" > Book List</a> &nbsp;&nbsp;&nbsp;
+					<label><a href="book/userBookList" > My Book List </a>
+				</tr><br>
+			<% } %>
+			
+		</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>File</title>
+</head>
+<body>
+	<form method="post" action="/book/addBook" enctype="multipart/form-data">
+		<table width="100px" height = "100px">
+			<h1 align = "center" style="color: #B22222">Admin Pannel</h1>
+			<h2>Add New Book Record!!</h2>
+			<tr>
+				<label>Book Name : </label>&nbsp;
+				<label><input type="text" name="bookname"></label>
+			</tr><br>
+			<tr>
+				<label>Author : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input type="text" name="author"></label>
+			</tr><br>
+			<tr>
+				<label>Quantity : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input type="text" name="quantity"></label>
+			</tr><br>
+			<tr>
+				<label>Book Category : </label>&nbsp;
+				<label><select name = "type">
+					<option value="">---Select---</option>
+					<option value="1">Study Book</option>
+					<option value="2">Detective Book</option>
+					<option value="3">Story Book</option>
+				</select></label>
+			</tr><br><br>
+			<tr>
+				<label>Image : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input type="file" name="image"></label>
+			</tr><br><br>
+			<tr>				
+				<label align = "center"><input type="submit" name="submit" value = "Add Book"></label>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

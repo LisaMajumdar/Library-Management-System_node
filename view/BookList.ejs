@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+</head>
+<body>
+	<form method="post">
+		<table width="100px" height = "50px" border="1">
+			<h1>Book List</h1>
+			<tr width="100px">
+				<td width="10px" align="center">Sl No</td>
+				<td width="10px" align="center">Book Name</td>
+				<td width="10px" align="center">Author</td>
+				<td width="10px" align="center">Quanty</td>
+				<td width="10px" align="center">Image</td>
+				<td width="10px" align="center">Option</td>
+			</tr>
+			<%
+			var sl = 0;
+			for(var i=0; i < data.length; i++) { 
+				sl++;
+			%>
+				<tr width="100px">
+					<td width="10px" align="center"><%=sl%></td>
+					<td width="10px" align="center"><%= data[i].bookname %></td>
+					<td width="10px" align="center"><%= data[i].author %></td>
+					<td width="10px" align="center"><%= data[i].quantity %></td>
+					<td width="10px" align="center"><img src="/uploads/image/<%= data[i].image %>" height = "100px" weidth = "125px"></td>
+					<td><a href="/bookRequestDetails/<%= data[i].id %>">Request</a></td>
+				<tr>			
+			<% } %>
+			
+		</table>
+	</form>
+</body>
+</html>
