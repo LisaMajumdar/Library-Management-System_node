@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>File</title>
+	<title>Add Book</title>
+	<style>
+			#r {
+			  background-color:     #d5f5e3;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 </head>
-<body>
-	<form method="post" action="/book/addBook" enctype="multipart/form-data">
-		<table width="100px" height = "100px">
-			<h1 align = "center" style="color: #B22222">Admin Pannel</h1>
-			<h2>Add New Book Record!!</h2>
-			<tr>
-				<label>Book Name : </label>&nbsp;
-				<label><input type="text" name="bookname"></label>
-			</tr><br>
-			<tr>
-				<label>Author : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="text" name="author"></label>
-			</tr><br>
-			<tr>
-				<label>Quantity : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="text" name="quantity"></label>
-			</tr><br>
-			<tr>
-				<label>Book Category : </label>&nbsp;
-				<label><select name = "categoryId">
-					<option value="">---Select---</option>
-					<option value="1">Study Book</option>
-					<option value="2">Detective Book</option>
-					<option value="3">Story Book</option>
-				</select></label>
-			</tr><br><br>
-			<tr>
-				<label>Image : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="file" name="image"></label>
-			</tr><br><br>
-			<tr>				
-				<label align = "center"><input type="submit" name="submit" value = "Add Book"></label>
-			</tr>
-		</table>
-	</form>
+<body id = 'r'>
+	<div class="container" >
+		<h1 align = "center" style="color: #B22222"><u>Admin Pannel</u></h1>
+		<form method="post" action="/book/addBook" enctype="multipart/form-data">
+					
+				<h2 style="color:  #34495e;">Add New Book Record!!</h2>
+				<div class="form-group">				
+					<label for="pwd">Book Name : </label>
+					<input type="text" class="form-control" name="bookname">
+				</div>
+				<div class="form-group">
+					<label  for="pwd">Author : </label>
+					<input type="text" class="form-control" name="author">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Quantity : </label>
+					<input type="text" class="form-control" name="quantity">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Book Category : </label>
+					<select name = "categoryId" class="form-control">
+						<option value="">---Select---</option>
+						<option value="1">Study Book</option>
+						<option value="2">Detective Book</option>
+						<option value="3">Story Book</option>
+					</select>
+				</div>				
+				<div class="form-group">
+					<label>Image : </label>
+					<input type="file" class="form-control" name="image" id="userimage">
+					<div id = "userimageID" style="display: none; color: red;"> *Please Enter Image* .</div>
+				</div>
+				<button type="submit" class="btn btn-default">Add Book</button>		
+		</form>
+	</div>
 </body>
 </html>
