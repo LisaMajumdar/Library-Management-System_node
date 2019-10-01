@@ -127,4 +127,19 @@ module.exports.createPDF = (req,res,callback) => {
 }
 
 
+module.exports.notification = (req,res,callback) => {
+
+	Userid  =  req.body.id;
+	UserRepository.userDetails(Userid).then(result => {
+		details = {
+			name : result.dataValues.name,
+			email : result.dataValues.email
+		}
+		console.log(details);
+		global.eventemitter.emit('NotificationEmail',details);		
+	}).catch(err => {
+		console.log(err);
+	});
+}
+
 

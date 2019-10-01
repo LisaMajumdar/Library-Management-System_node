@@ -71,7 +71,8 @@ router.get('/profile',CommonFunction.verifyToken,LoginController.profile);
 router.get('/profileview',CommonFunction.verifyToken,LoginController.profile);
 
 
-router.post('/createPDF',CommonFunction.verifyToken,UserController.createPDF)
+router.post('/createPDF',CommonFunction.verifyToken,UserController.createPDF);
+router.post('/notification',CommonFunction.verifyToken,UserController.notification);
 
 var cornset = cron.schedule('54 15 * * *', () => {
   console.log('running a task every minute');

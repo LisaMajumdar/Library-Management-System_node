@@ -77,3 +77,15 @@ global.eventemitter.on('forgetPassword', function (data) {
      let msg =  "<b>Dear "+data.name+",<br>&nbsp;&nbsp;Reset Your profile password by click the below Link . It will be validate for 24 hours. <br> <a href = "+url+"> click here </a>";   
      email.Mail(senderemail,reciveremail,subject,'',msg);
 })
+
+
+global.eventemitter.on('NotificationEmail', function (data) {
+     console.log(123);
+    // let url = 'http://127.0.0.1:8000/fpass/'+data.token; 
+     let senderemail = '<foo@example.com>'; 
+     let reciveremail = data.email;                                    
+     let subject = "Notification For Subscription";  
+     let textmsg = "Hello world?";                              
+     let msg =  "<b>Dear "+data.name+",<br>Please subscribe our website for getting the pdf of each book.";   
+     email.Mail(senderemail,reciveremail,subject,'',msg);
+})
