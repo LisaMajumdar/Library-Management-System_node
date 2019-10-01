@@ -1,5 +1,4 @@
 const async=require('async');
-const Sequelize = require('sequelize');
 const sequelize = require('../config/database').sequelize;
 var DataTypes = require('sequelize/lib/data-types');
 const bcrypt=require('bcrypt-nodejs');
@@ -12,7 +11,7 @@ var Issue = require('../models/issue')(sequelize,DataTypes);
 
 Issue.hasMany(Book , {foreignKey : 'id' , sourceKey : 'book_id'});
 User.hasMany(Issue , {foreignKey : 'user_id' , sourceKey : 'id'});
-
+Issue.belongsTo(User,{foreignKey : 'user_id' , sourceKey : 'id'})
 
 /***********************************************************************************/
 
@@ -62,12 +61,14 @@ module.exports.checkEmail=(email,next)=>{
 	});
 }
 
+
+
 module.exports.getUserDetails = (data,callback) => {
 	User.findOne({
 		where : {
 			id : data.id
 		},
-		attributes : ['name','email','mobile'],
+		attributes : ['memberid','name','email','mobile'],
 		include: [
 			{
 				model : Issue,
@@ -87,16 +88,47 @@ module.exports.getUserDetails = (data,callback) => {
 	});
 }
 
+
+module.exports.memberList = (data,callback) => {
+	User.findAll({
+		where : {
+			status : 'A'
+		},
+		attributes:['id','memberid','name','email','mobile','image','subscribe',[sequelize.fn("COUNT", sequelize.col("issues.id")), "issuesCount"]],	
+		include : [
+			{
+				model : Issue,
+				where : {
+					status : 'C'
+				},
+				attributes : []						
+				
+			}		
+		],
+		group : ['issues.user_id']		
+		
+	}).then(res=>{
+		callback(null,res);
+	}).catch(err=>{
+		callback(err,null);
+	});
+}
+
+
+
 module.exports.verifyEmail = (data,callback) => {	
 	User.findOne({
 		where : {
 			token : data.token,
 			status : 'I'
-		}
+		},
+		attributes : ['id']
 	}).then(result => {		
 		if(result != null)
         { 
+        	var memberid = 'M-E00'+result.dataValues.id;
 			let record = {
+				memberid : memberid,
 				status : 'A'
 			}; 
 			User.update(record,{ where: {id : result.dataValues.id}}).then(res1 => {
@@ -115,7 +147,7 @@ module.exports.verifyEmail = (data,callback) => {
 	});
 }
 
-module.exports.userDetails = (userid)=>{
+module.exports.users = (userid,callback)=>{
 	User.findOne({
 		where : {
 			id : userid,
@@ -123,10 +155,27 @@ module.exports.userDetails = (userid)=>{
 		},
 		attributes : ['name','email','mobile']
 	}).then(result => {
-		deferred.resolve(result)
+		callback(null,result)
 	}).catch(error => {
-		deferred.reject(error);
+		callback(error,null);
 	});
 
 	return deferred.promise;
+}
+
+
+module.exports.userDetails = (userid)=>{
+	return new Promise(function(resolve,reject){
+		User.findOne({
+			where : {
+				id : userid,
+				status : 'A'
+			},
+			attributes : ['name','email','mobile']
+		}).then(result => {
+			resolve(result)
+		}).catch(error => {
+			reject(error);
+		});
+	});	
 }

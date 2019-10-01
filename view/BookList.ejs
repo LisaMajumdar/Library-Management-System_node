@@ -2,35 +2,50 @@
 <html>
 <head>
 	<title>Books</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-	<form method="post">
-		<table width="100px" height = "50px" border="1">
-			<h1>Book List</h1>
-			<tr width="100px">
-				<td width="10px" align="center">Sl No</td>
-				<td width="10px" align="center">Book Name</td>
-				<td width="10px" align="center">Author</td>
-				<td width="10px" align="center">Quanty</td>
-				<td width="10px" align="center">Image</td>
-				<td width="10px" align="center">Option</td>
-			</tr>
+	<div class="container">
+		<h1 align="center" style="color: #c11926;"><u>Book List</u></h1>
+		<table class="table table-bordered table-striped">			
+			<thead >
+				<tr width="100px">
+					<th>Sl No</th>
+					<th>Book Name</th>
+					<th>Author</th>
+					<th>Quanty</th>
+					<th>Image</th>
+					<th>Update Quantity</th>
+					<th>Option</th>					
+				</tr>
+			<thead>
+			<tbody>
 			<%
 			var sl = 0;
 			for(var i=0; i < data.length; i++) { 
 				sl++;
 			%>
 				<tr width="100px">
-					<td width="10px" align="center"><%=sl%></td>
-					<td width="10px" align="center"><%= data[i].bookname %></td>
-					<td width="10px" align="center"><%= data[i].author %></td>
-					<td width="10px" align="center"><%= data[i].quantity %></td>
-					<td width="10px" align="center"><img src="/uploads/image/<%= data[i].image %>" height = "100px" weidth = "125px"></td>
-					<td><a href="/bookRequestDetails/<%= data[i].id %>">Request</a></td>
-				<tr>			
+					<td  ><%=sl%></td>
+					<td  ><%= data[i].bookname %></td>
+					<td ><%= data[i].author %></td>
+					<td ><%= data[i].quantity %></td>
+					<td >
+						<img src="/uploads/image/<%= data[i].image %>" height = "75px" weidth = "50px">
+					</td>
+					<td >
+						<a href="/bookQuantity/<%= data[i].id %>">Edit</a>
+					</td>
+					<td >
+						<a href="/bookRequestDetails/<%= data[i].id %>">Request List</a>
+					</td>
+				</tr>			
 			<% } %>
+			</tbody>
 			
 		</table>
-	</form>
+	</div>
 </body>
 </html>

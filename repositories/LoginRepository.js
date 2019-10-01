@@ -1,5 +1,4 @@
 const async=require('async');
-const Sequelize = require('sequelize');
 const sequelize = require('../config/database').sequelize;
 var   DataTypes = require('sequelize/lib/data-types');
 const bcrypt=require('bcrypt-nodejs');
@@ -12,7 +11,7 @@ var CommonFunction = require('../middlewares/CommonFunction')
 
 module.exports.login = (data,callback) => {	
 	let email = data.email;
-	let type = data.type;  console.log(type);
+	let type = data.type;  
 	let password  = data.password; 
 	User.findOne({
 		where : {
@@ -21,10 +20,10 @@ module.exports.login = (data,callback) => {
 			type   : type
 		},
 		attributes : ['id','password']
-	}).then(result => {
-		//console.log(result);
+	}).then(result => {		
 		hash = result.dataValues.password;	
 		let userId = result.dataValues.id;	
+	//	console.log(bcrypt.compareSync(password , hash));
 		if(bcrypt.compareSync(password , hash) == true)
 		 {		 	
 			let playload = {					
@@ -64,4 +63,45 @@ module.exports.profile = (data,callback) => {
 	}).catch((error)=> {
 		 callback(error, null);
 	}); 	
+}
+
+
+module.exports.forgetPasswordSendLink = (data,callback) => {	
+	let email = data.email;
+	let type = data.type;  
+	User.findOne({
+		where : {
+			email : email,
+			status : 'A',
+			type   : type
+		},
+		attributes : ['token','name']
+	}).then(result => {
+		let details = {
+			name  : result.dataValues.name,
+			email : email,
+			token : result.dataValues.token
+		}
+		global.eventemitter.emit('forgetPassword',details);		
+		let msg = 1;
+		callback(null,msg);
+	}).catch(err => {
+		let msg = 0;		
+		callback(msg,null);
+	});
+}
+
+
+module.exports.updatefpass = (data,callback) => {
+	let token  	  	= data.uniqueval; 
+	let saltRounds 	= global.constant.saltRounds;			
+	var salt 		= bcrypt.genSaltSync(saltRounds);			
+	var password 	= bcrypt.hashSync(data.password, salt);
+	User.update({password : password},{where : {token : token}}).then(result => {
+		let msg = 1;
+		callback(null,msg);
+	}).catch(err => {
+		let msg = 2;
+		callback(msg,null);
+	});
 }

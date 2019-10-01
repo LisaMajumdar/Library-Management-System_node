@@ -2,36 +2,64 @@
 <html>
 <head>
 	<title>Books</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-	<form method="post">
-		<table width="100%" height = "50%" border="1">
-			<h1>Book List</h1>
-			<tr width="100px">
-				<td width="10px" align="center">Sl No</td>
-				<td width="10px" align="center">Book Name</td>
-				<td width="10px" align="center">Author</td>
-				<td width="10px" align="center">Quanty</td>
-				<td width="10px" align="center">Image</td>
-				<td width="10px" align="center">Option</td>
-			</tr>
-			<%
-			var sl = 0;
-			console.log(data); 
-			for(var i=0; i < data.length; i++) { 
-				sl++;
-			%>
+	<div class="container">
+		<div align="right"><a href="/Logout">Logout</a></div>
+		<h1 align="center" style="color: #c11926;"><u>Book List</u></h1>
+		<form method="post" action = "/book/search">
+			<tr>
+				<label>Select Book category: </label>&nbsp;
+				<label><select name = "categoryId">
+					<option value="">---Select---</option>
+					<option value="1" >Study Book</option>
+					<option value="2">Detective Book</option>
+					<option value="3">Story Book</option>
+				</select></label>
+			</tr><br>
+			<tr>				
+				<label align = "center"><input type="submit" name="submit" value="submit"></label>
+			</tr><br>
+		</form>
+		<table class="table table-bordered table-striped">			
+			<thead >		
 				<tr width="100px">
-					<td width="10px" align="center"><%=sl%></td>
-					<td width="10px" align="center"><%= data[i].bookname %></td>
-					<td width="10px" align="center"><%= data[i].author %></td>
-					<td width="10px" align="center"><%= data[i].quantity %></td>
-					<td width="10px" align="center"><img src="/uploads/image/<%= data[i].image %>" height = "100px" weidth = "125px"></td>
-					<td><a href="/bookRequest/<%= data[i].id %>">Request</a></td>
-				<tr>			
-			<% } %>
+					<th>Sl No</th>
+					<th>Book Name</th>
+					<th>Author</th>
+					<th>Quantity</th>
+					<th>Image</th>
+					<th>Option</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				var sl = 0;
+				console.log(data); 
+				for(var i=0; i < data.length; i++) { 
+					sl++;
+				%>
+					<tr width="100px">
+						<td ><%=sl%></td>
+						<td ><%= data[i].bookname %></td>
+						<td ><%= data[i].author %></td>
+						<td ><%= data[i].quantity %></td>
+						<td ><img src="/uploads/image/<%= data[i].image %>" height = "100px" weidth = "125px"></td>
+						<td>
+							<% if(data[i].quantity > 0) { %>
+									<a href="/bookRequest/<%= data[i].id %>">Request</a>
+							<% } else{ %>
+									<span>Not Available</span>
+							<% } %>
+						</td>
+					<tr>			
+				<% } %>
+			</tbody>
 			
 		</table>
-	</form>
+	</div>
 </body>
 </html>

@@ -5,4 +5,6 @@ module.exports = {
 		public_key : 'config/Public_key.md',
    		algorithm: 'HS256'      	
 	},
+	fine : 5,
+	subscriptionAmt : 250
 }

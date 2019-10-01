@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>	
+	<div class="container">
+		<div align="right"><a href="/Logout">Logout</a></div>
+		<h1 align="center" style="color: #c11926;"><u>Books Record</u></h1>
+		<table class="table table-bordered table-striped">			
+			<thead >
+				<tr width="100px">
+					<th>Sl No</th>
+					<th>Book Name</th>
+					<th>Author</th>
+					<th>Book Id</th>					
+					<th>Update Date</th>					
+					<th>Status</th>										
+				</tr>
+			<thead>
+			<tbody>
+			<%
+			var sl = 0;
+			for(var i=0; i < data.length; i++) { 
+				console.log(data[i]);
+				sl++;
+			%>
+				<tr width="100px">
+					<td><%=sl%></td>
+					<td><%= data[i].dataValues.book.bookname %></td>
+					<td><%= data[i].dataValues.book.author %></td>
+					<td><% if(data[i].dataValues.BookAllotId == null){ %>
+							<span>--</span>
+						<% }else{ %>
+							<span><%=data[i].dataValues.BookAllotId%></span>
+						<% } %>	
+					</td>
+					<td><%= data[i].dataValues.issueDate %></td>
+					<td><% if(data[i].dataValues.status == 'C'){ %>
+								<span>Confirmed</span>
+						<% } else if(data[i].dataValues.status == 'I'){ %>
+								<span style="color: #c11926;">Rejected By Librarian</span>  
+						<% }else if(data[i].dataValues.status == 'D'){ %>
+								<span style="color: #2ae91e;">Returned Successfully</span>
+						<% }else if(data[i].dataValues.status == 'R'){ %>
+								<span>Request Pending</span>
+						<% }else{ %>
+								<span>Request Approved</span>
+						<% } %>
+					</td>
+				</tr>			
+			<% } %>
+			</tbody>
+			
+		</table>
+	</div>
+</body>
+</html>

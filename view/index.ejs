@@ -2,35 +2,45 @@
 <html>
 <head>
 	<title>Registration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<style>
+	h1{
+		background-color:   #85c1e9;
+		font-size: 56px;	
+	}
+	.r {
+	  background-color:   #85c1e9;
+	  border: none;
+	  color: red;
+	  padding: 10px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	} 
+
+	.r1 {
+	  background-color:   #76d7c4;
+	  border: none;
+	  color: red;
+	  padding: 10px 25px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+	}
+
+</style>
 </head>
 <body>
-	<form method="post" action="/user/insert" enctype="multipart/form-data">
-		<table width="100px" height = "100px">
-			<h1>Register Here !!</h1>
-			<tr>
-				<label>Name : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="text" name="name"></label>
-			</tr><br>
-			<tr>
-				<label>Email : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="email" name="email"></label>
-			</tr><br>
-			<tr>
-				<label>Password : </label>&nbsp;
-				<label><input type="password" name="password"></label>
-			</tr><br>
-			<tr>
-				<label>Mobile : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="text" name="mobile"></label>
-			</tr><br>
-			<tr>
-				<label>Image : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="file" name="userimage"></label>
-			</tr><br>
-			<tr>				
-				<label align = "center"><input type="submit" name="submit" value = "Register"></label>
-			</tr>
-		</table>
-	</form>
+	<h1 style=" color : #c11926" align = "center" valign = "middle"><U>E - Library Management System</u></h1>
+	<br><h6 align = "center" valign = "middle"> <button type="button" class = 'r'><a href="/Login">Sign In</a></button> &nbsp; 
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<button type="button" class = 'r1'><a href="/Registration">Sign Up</a></button> </h6>
 </body>
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<style type="text/css">
+  		.r1 {
+		  background-color:   #ff531a;
+		  border: none;
+		  color: black;
+		  padding: 5px 15px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 12px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		  float: right;
+		}
+  	</style>
+  	
+</head>
+<body>
+	<div class="container">
+		<div align="right"><a href="Logout">Logout</a></div>
+		<h1 align="center" style="color: #c11926;"><u>Member List</u>
+		<button type="button" class = 'r1'><a id="createPDF">Download PDF</a></button> </h6></h1>
+		<table class="table table-bordered table-striped">			
+			<thead >
+				<tr width="100px">
+					<th>Sl No</th>
+					<th>Member Name</th>
+					<th>Email</th>
+					<th>Mobile</th>					
+					<th>Alloted Books</th>
+					<th>Image</th>
+					<!-- <th>Status</th> -->
+					<th>Subscription Status</th>					
+				</tr>
+			<thead>
+			<tbody>
+			<%
+			var sl = 0;
+			for(var i=0; i < data.length; i++) { 				
+				sl++;
+			%>
+				<tr width="100px">
+					<td><%=sl%></td>
+					<td><%= data[i].name %></td>
+					<td><%= data[i].email %></td>
+					<td><%= data[i].mobile %></td>
+					<td>						
+						<a href="/book/userBookList/<%= data[i].id %>"><%= data[i].dataValues.issuesCount %></a>
+					</td>
+					<td>
+						<img src="/uploads/userimage/<%= data[i].image %>" height = "75px" weidth = "50px">
+					</td>
+					<td>
+						<% if(data[i].subscribe == 'Yes'){%>
+							<span>Subscribed</span>
+						<% } else {%>
+							<span>Not Subscribed</span>
+						<% } %>
+					</td>
+					
+				</tr>			
+			<% } %>
+			</tbody>
+			
+		</table>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+		$('#createPDF').click(function(){
+		   $.ajax({
+	          type: 'POST',	        
+	          url:'http://127.0.0.1:8000/createPDF',
+	          contentType: 'application/json',         
+	          success: function(response){
+	            console.log(response);	                 
+	          }
+	      });
+		});
+	});
+</script>
+
+
+</html>

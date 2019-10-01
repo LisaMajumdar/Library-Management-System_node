@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+	<style>
+			#r {
+			  background-color:    #d7bde2 ;
+			}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body id = 'r'>
+	<div class="container" >
+		<h1 align= "center">Register Here !!</h1>
+		<form method="post" action="/user/insert" enctype="multipart/form-data" id = "myfrm">
+			<div class="form-group">
+				<label>Name : </label>
+				<input type="text" class="form-control" name="name" id="name">
+				<div id = "nameID" style="display: none; color: red;"> *Please Enter Name* .</div>
+			</div>
+			<div class="form-group">
+				<label>Email : </label>
+				<input type="email" class="form-control" name="email" id="email">
+				<div id = "emailID" style="display: none; color: red;"> *Please Enter Email Id* .</div>
+			</div>
+			<div class="form-group">
+				<label>Password : </label>
+				<input type="password"  class="form-control" name="password" id="password">
+				<div id = "passwordID" style="display: none; color: red;"> *Please Enter Password* .</div>
+			</div>
+			<div class="form-group">
+				<label>Mobile : </label>
+				<input type="text"  class="form-control" name="mobile" id="mobile">
+				<div id = "mobileID" style="display: none; color: red;"> *Please Enter Contact No* .</div>
+			</div>
+			<div class="form-group">
+				<label>Image : </label>
+				<input type="file" class="form-control" name="userimage" id="userimage">
+				<div id = "userimageID" style="display: none; color: red;"> *Please Enter Image* .</div>
+			</div>
+			<button type="submit" class="btn btn-default">Register</button>			
+		</form>
+	</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function() { 
+	 	$('#myfrm').on('submit', function(e){	 		
+	     //   e.preventDefault();
+	        var flag = 0;
+	        if($('#name').val() == '')
+	        {
+	        	$('#nameID').show('slow');
+	        	flag++;
+	        }	       
+	        var email = $('#email').val();
+	        if(email == '')
+	        {
+	        	$('#emailID').show('slow');
+	        	flag++;
+	        }	     
+	        var password = $('#password').val();
+	        if(password == '')
+	        {
+	        	$('#passwordID').show('slow');
+	        	flag++;
+	        }
+
+	        var mobile = $('#mobile').val();
+	        if(mobile == '')
+	        {
+	        	$('#mobileID').show('slow');
+	        	flag++;
+	        }
+	        //var file = $("#userimage")[0].files[0].size;
+	        var file = $('#userimage').val();
+	       
+	        if(file == '')
+	        {
+	        	$('#userimageID').show('slow');
+	        	flag++;
+	        }
+	        else{
+
+	        	if($("#userimage")[0].files[0].size > 2000000)
+		        {
+		        	$('#userimageID').show('slow');
+		        	$('#userimageID').html('Please upload less than 2 Mb file.');
+		        	flag++;
+		        }		     
+		         var filename = $("#userimage")[0].files[0].name;
+		         var arr = filename.split(".");
+  				 let ext = arr[1];  
+  				// console.log(ext);
+  				/*if(ext != 'jpg' || ext != 'JPG' || ext != 'jpeg' || ext != 'JPEG' || ext != 'png')
+  				{
+  					alert(ext);
+  					$('#userimageID').show('slow');
+		        	$('#userimageID').html('Please upload a file with valid extention (jpg , JPEG , png , JPG , jpeg).');
+		        	flag++;
+  				}	*/			
+
+	        }
+
+	        if(flag > 0)
+	        {
+	        	return false;
+	        }
+	    });
+	});
+</script>

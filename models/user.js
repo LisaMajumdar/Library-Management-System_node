@@ -1,6 +1,9 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
+    memberid: {      
+      type:DataTypes.STRING
+    },
     name: {
     	allowNull: false,
     	type:DataTypes.STRING
@@ -33,6 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.ENUM('A','I','D'),
       allowNull: false,
       defaultValue: 'I'
+     },
+    subscribe: { 
+      type : DataTypes.ENUM('Yes','No'),
+      allowNull: false,
+      defaultValue: 'No'
      }
   }, {});
   User.associate = function(models) {

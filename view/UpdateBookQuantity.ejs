@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>File</title>
+	<style>
+		#r {
+		  background-color:   #d4e6f1 ;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body id = 'r'>
+	<div class="container" >		
+		<h2 align = "center" style="color: #B22222">Add Book Quantity</h2>
+	<form method="post" action="/UpdateBookQuantity">
+		<table width="100px" height = "100px">			
+			<div class="form-group">
+				<label><input type="hidden" name="bookId" value = "<%= bookId %>"></label>
+				<label for="pwd">Quantity : </label>
+				<input type="text" name="qty" class="form-control">
+			</div>
+				<button type="submit" class="btn btn-default">Add Book</button>			
+			<!-- <tr>				
+				<label align = "center"><input type="submit" name="submit" value = "Add Book"></label>
+			</tr> -->
+		</table>
+	</form>
+	</div>
+</body>
+</html>

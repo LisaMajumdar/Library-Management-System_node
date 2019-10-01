@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     book_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
     BookAllotId : DataTypes.STRING,
+    booklistId : DataTypes.INTEGER,
+    fineAmt  : DataTypes.STRING,
+    issueDate : DataTypes.STRING,
     status: { 
       type : DataTypes.ENUM('A','I','D'),
       allowNull: false,

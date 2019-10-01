@@ -31,9 +31,10 @@ app.get('/', function (req, res) {
   res.render(__dirname+'/view/index')
 })
 
-app.get('/login', (req, res) => {
+/*app.get('/login', (req, res) => {
   res.render(__dirname+'/view/login')
-})
+})*/
+
 
 
 // loading index page for view section
