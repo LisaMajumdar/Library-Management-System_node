@@ -54,20 +54,30 @@
 				</div>
 				<div>
 					<br>
+					<label>
+						<a href = "profile/edit" > Edit Profile </a> &nbsp;&nbsp;&nbsp;
+						<a href = "Dashboard" >  Back </a> &nbsp;&nbsp;&nbsp;
+					</label>
+				</div>
+
+				<!-- <div>
+					<br>
 					<% if(data.type == 'admin'){ %>
 						<label>
 							<a href = "book/addBookView" > + Add Book </a> &nbsp;&nbsp;&nbsp;
 							<a href = "book/bookList" >  Book List </a> &nbsp;&nbsp;&nbsp;
 							<a href = "book/addBookView" > Request List  </a> &nbsp;&nbsp;&nbsp;
-							<a href = "user/memberList" > Members  </a> 
+							<a href = "user/memberList" > Members  </a> &nbsp;&nbsp;&nbsp;
+							<a href = "changePassword" > Change Password  </a>
 						</label>
 					<% }else{ %>
 						<label>
-							<a href="book/bookList" > Book List</a> &nbsp;&nbsp;&nbsp;
-							<a href="book/userBookList" > My Book List </a>
+							<a href="book/bookList"> Book List</a> &nbsp;&nbsp;&nbsp;
+							<a href="book/userBookList"> My Book List </a> &nbsp;&nbsp;&nbsp;
+							<a href = "changePassword"> Change Password  </a>
 						</label>
 					<% } %>
-				</div>			
+				</div> -->			
 			</div>
 		</div>
 	</div>
@@ -75,8 +85,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() { 
-		$('#Booklist').click(function(){
-			alert('Done');
+		$('#Booklist').click(function(){			
 		   $.ajax({
 	          type: 'POST',	        
 	          url:'http://127.0.0.1:8000/book/bookList',

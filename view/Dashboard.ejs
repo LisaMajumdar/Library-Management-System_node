@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #938;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #e76dbb;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.back {
+  
+  background-color: #e64e44;
+}
+
+.main{
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+  background-color: #cbefdf;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body class="back">
+<div align="right" style="font-size: 18px;"><a href="Logout">Logout</a></div>
+<div class="sidenav">
+  <a href="profile">Profile</a>
+  <%if(record.type == 'admin'){
+    var msg = 'E - Library Management System';
+    var msg1 = 'Welcome To Admin Pannel';
+  %>
+    <a href = "user/memberList" > Members  </a>
+    <a href = "book/bookList" >  Book List </a>
+    <a href = "Issues" > Request List  </a> 
+    <a href = "book/addBookView" > Add Book </a>
+  <% } else {
+      var msg = 'Welcome To E - Library';      
+    %>
+    <a href="book/bookList"> Book List</a> 
+    <a href="book/userBookList"> My Book List </a>
+    <a href="#contact">Contact</a>
+  <%} %>
+  <a href = "changePassword" > Change Password  </a>
+  
+</div>
+
+<div class="main">
+  <h2 style="color: #17173d;"><%=msg%><br><%=msg1%></h2>
+  <p><%=record.id%></p>
+  <p><%=record.type%></p>
+  
+</div>
+   
+</body>
+</html> 

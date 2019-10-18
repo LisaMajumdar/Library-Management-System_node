@@ -83,7 +83,7 @@ module.exports.publicKey = () => {
 
 
 module.exports.readFile = (file) => {
-//	let file = global.constant.jwt.public_key;
+	//let file = global.constant.jwt.public_key;
 	let filePath = global.apppath+'/'+file;
 	//let secret = fs.readFileSync(filePath,'utf-8');	
 	return filePath;
@@ -126,7 +126,8 @@ module.exports.verifyToken = (req,res,callback) => {
 			    	where :{id :result.body.userId , type : result.body.usertype},
 			    	attributes : ['id','type']
 		    	}).then((result1)=> {		    		
-		    		 req.user = result1;  		
+		    		 req.user = result1;  	
+		    		 //console.log('user record ============== ',req.user);	
 		    		 return callback();
 		    	}).catch((error)=> {
 		    		 return  callback(error, null);

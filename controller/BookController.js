@@ -179,7 +179,6 @@ module.exports.bookReturn = (req, res, callback) => {
 module.exports.UpdateBookQuantity = (req, res, callback) => {	
 	if(req.user.dataValues.type == 'admin')
 	{
-		//console.log(req.body);
 		BookRepository.UpdateBookQuantityFrmAdmin(req.body,function(err,result){
 			if(err)
 				callback(err);
@@ -229,7 +228,7 @@ module.exports.cornEmailset = (req,res,callback) => {
 			var diff = CommonFunction.dateDifference(item.dataValues.issueDate);			
 			//console.log(diff);
 			var details =   {};
-			if(diff < 6){
+			if(diff > 6){
 				let count = (diff - 1);
 				let amount = CommonFunction.lateFine(count);
 				if(amount != 0 || amount != null)
@@ -259,4 +258,15 @@ module.exports.cornEmailset = (req,res,callback) => {
 	}).catch((error)=>{
 		console.log(error);
 	})
+}
+
+// All Request 
+
+module.exports.Issues = (req,res,callback) => {
+	BookRepository.issues(req,function(err,result){
+			if(err)
+				callback(err);
+			else
+				res.render('AllCurrentIssues',{'data' : result});
+		});
 }

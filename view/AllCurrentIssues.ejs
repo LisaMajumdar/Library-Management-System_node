@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Issue</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1 align="center" style="color: #c11926;"><u>Current Issue List</u></h1>
+		<table class="table table-bordered table-striped" style="color:  #34495e;">			
+			<thead >
+				<tr width="100px">
+					<th>Sl No</th>
+					<th>Member Name</th>
+					<th>Email</th>
+					<th>Contact</th>
+					<th>Book Name</th>
+					<th>Author</th>					
+					<th>Option</th>					
+				</tr>
+			<thead>
+			<tbody>
+			<%
+			var sl = 0;
+			for(var i=0; i < data.length; i++) { 
+				sl++;
+			%>
+				<tr width="100px">
+					<td  ><%=sl%></td>
+					<td ><%= data[i].User.name %></td>
+					<td ><%= data[i].User.email %></td>
+					<td ><%= data[i].User.mobile %></td>
+					<td  ><%= data[i].book.bookname %></td>
+					<td ><%= data[i].book.author %></td>					
+					<td >
+						<% if(data[i].status =='R')
+							{ %>
+													
+								<a href="/bookRequestApproveDetails/<%= data[i].id %>">Pending</a> OR
+								<a href="/bookRequestReject/<%= data[i].id %>">Reject</a>
+
+							<% } %>
+					</td>
+				</tr>			
+			<% } %>
+				<tr width="100px">
+					<td colspan="6" align="center"><a href = "/Dashboard" >  Back </a></td>					
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+</body>
+</html>

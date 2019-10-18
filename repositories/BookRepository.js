@@ -102,6 +102,30 @@ module.exports.bookList = (data,callback) => {
 	});
 }
 
+// All Book request 
+module.exports.issues = (data,callback) => {
+	Issue.findAll({
+		where : {status : 'R'},
+		attributes : ['id','user_id','book_id','status','createdAt'],
+		include : [
+
+			{
+				model : User,
+				attributes : ['name','email','mobile']
+			},
+
+			{
+				model : Book,
+				attributes : ['bookname','author']
+			},
+		]
+	}).then(result => {
+		callback(null,result);
+	}).catch(error => {
+		callback(error,null);
+	});
+}
+
 // Book request detail for admin
 
 module.exports.bookRequestDetails = (data,callback) => {
@@ -614,7 +638,7 @@ module.exports.UpdateBookQuantityFrmAdmin = (data,callback) => {
 			  	});
 			}
 			Book.update({ quantity : preQty} , {where : {id : bookId}}).then(res => {
-				callback(null,res)
+				callback(null,res);
 			}).then(err => {
 				callback(err,null);
 			});

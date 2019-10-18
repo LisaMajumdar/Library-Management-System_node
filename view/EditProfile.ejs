@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Profile</title>
+	<style>
+			#r {
+			  background-color:     #d5f5e3;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+</head>
+<body id = 'r'>
+	<div class="container" >
+		<h1 align = "center" style="color: #B22222"><u>Edit Profile</u></h1>
+		<form method="post" action="/editProfile" enctype="multipart/form-data">				
+				
+				<div class="form-group">				
+					<label for="pwd"> Name : </label>
+					<input type="text" class="form-control" name="name" value = "<%= data.name %>">
+				</div>
+				<div class="form-group">
+					<label  for="pwd">Email : </label>
+					<input type="email" class="form-control" name="email" value = "<%= data.email %>">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Mobile : </label>
+					<input type="text" class="form-control" name="mobile" value = "<%= data.mobile %>">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Image : </label>
+					<img src="/uploads/userimage/<%= data.image %>" height = "45px" weidth = "25px">
+					<input type="file" class="form-control" name="userimage" id="userimage">
+				</div>					
+				<button type="submit" class="btn btn-default">Submit</button>		
+		</form>
+	</div>
+</body>
+</html>

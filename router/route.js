@@ -17,14 +17,18 @@ var storage = multer.diskStorage({
     callback(null, global.filepath+'/'+res.fieldname);
   },
   filename: function (req, res, callback) {
-  	let orgfile =  res.originalname;
+  	let orgfile =  res.originalname; 
   	var arr = orgfile.split(".");
   	let ext = arr[1];  
   	if(res.fieldname == 'userimage')
   		{
 	  		let	fname = 'member-'+Date.now()+'.'+ext;   
 	  		callback(null , fname);
-  		}  		 	
+  		}
+    else if(res.fieldname == 'bookPdf'){
+        let fname = Date.now()+'.'+ext;   
+        callback(null , fname);
+     }  		 	
     else
 	    {
 	    	let fname = 'book-'+Date.now()+'.'+ext;
@@ -44,8 +48,13 @@ router.get('/user/verifyEmail/:token',UserController.verifyEmail);
 
 router.get('/ForgetPassword/:is_active?',LoginController.forgetPassword);
 router.post('/forgetPasswordSendLink',LoginController.forgetPasswordSendLink);
-router.get('/fpass/:uniqueId',LoginController.fpass)
-router.post('/updatefpass',LoginController.updatefpass)
+router.get('/fpass/:uniqueId',LoginController.fpass);
+router.post('/updatefpass',LoginController.updatefpass);
+
+router.get('/changePassword/:is_active?',CommonFunction.verifyToken,LoginController.changePassword);
+router.post('/chkOldPass',CommonFunction.verifyToken,LoginController.chkOldPass);
+router.post('/changePasswordProcess',CommonFunction.verifyToken,LoginController.changePasswordProcess);
+
 //router.get('/book/bookAllot/:bookid',BookController.bookAllot);
 router.get('/user/memberList',CommonFunction.verifyToken,UserController.memberList);
 router.post('/book/addCategory',BookController.addCategory);
@@ -67,7 +76,10 @@ router.post('/UpdateBookQuantity',CommonFunction.verifyToken,BookController.Upda
 
 
 router.post('/loginsec',LoginController.login);
-router.get('/profile',CommonFunction.verifyToken,LoginController.profile);
+router.get('/Dashboard',CommonFunction.verifyToken,LoginController.dashboard);
+router.get('/Issues',CommonFunction.verifyToken,BookController.Issues);
+router.get('/profile/:is_active?',CommonFunction.verifyToken,LoginController.profile);
+router.post('/editProfile',CommonFunction.verifyToken,upload.single('userimage'),LoginController.editProfile);
 router.get('/profileview',CommonFunction.verifyToken,LoginController.profile);
 
 

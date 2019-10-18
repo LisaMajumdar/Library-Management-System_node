@@ -1,6 +1,7 @@
 var fs = require('fs');
 var pdf = require('html-pdf');
 const PDFDocument = require('pdfkit');
+var download = require('download-pdf');
 var UserRepository = require('../repositories/UserRepository');
 
 module.exports.insert = (req,res,callback) =>{	
@@ -88,13 +89,23 @@ module.exports.createPDF = (req,res,callback) => {
 			html +=	"</table></div>";
 		  	var options = { format: 'Letter' };
 		  	var timestamp = Math.round(new Date().getTime()/1000);
-		  	var path  = './downloads/'+timestamp+'.pdf'
+		  	var filename = timestamp+'.pdf';
+		  	var path  = './downloads/'+filename;
 			pdf.create(html, options).toFile(path, function(err, res) {
 			  if (err) 
 			  	return console.log(err);
-			  else
-			  	console.log(res);
-			  	res
+			  else		
+			  	return console.log(result);	  	
+			  	/*var options1 = {				    
+				    directory : __dirname,
+				    filename: filename
+				}
+				 
+				download(global.apppath+'/downloads/'+filename, options, function(err){
+				    if (err) 
+				    console.log(err);
+				});*/
+			  	
 			});
 			res.render('MemberList',{'data':result});
 

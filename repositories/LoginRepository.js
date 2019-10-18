@@ -54,7 +54,7 @@ module.exports.login = (data,callback) => {
 
 module.exports.profile = (data,callback) => {
 	//console.log('Record Found');
-	console.log(data.user.dataValues);
+	
 	User.findOne({
     	where :{id :data.user.dataValues.id },
     	attributes : ['name','email','mobile','image','type']
@@ -63,6 +63,39 @@ module.exports.profile = (data,callback) => {
 	}).catch((error)=> {
 		 callback(error, null);
 	}); 	
+}
+
+module.exports.editProfile = (data, callback) => {
+	var userId = data.user.dataValues.id;
+	var filedata = data.file;
+	if(filedata != undefined)
+	{
+		var userdtls = {
+			name 	: data.body.name,
+			email 	: data.body.email,
+			mobile 	: data.body.mobile,
+			image  	: filedata.filename
+		}
+	}else{
+
+		var userdtls = {
+			name 	: data.body.name,
+			email 	: data.body.email,
+			mobile 	: data.body.mobile
+		}
+	}	
+	
+
+	User.update(userdtls,{where : {id : userId}}).then(result => {
+		this.profile(data,function(err,res){
+			if(res)
+				callback(null,res);
+			else
+				callback(err,null);
+		});		
+	}).catch(error => {
+		callback(error,null);
+	});
 }
 
 
@@ -104,4 +137,52 @@ module.exports.updatefpass = (data,callback) => {
 		let msg = 2;
 		callback(msg,null);
 	});
+}
+
+
+// New Section 
+
+module.exports.chkOldPass = (data,callback) => {
+	var oldPass 	= data.body.oldPass;
+    var userId 		= data.user.id;
+    User.findOne({
+    	where : {
+    		id : userId,
+    		status : 'A'
+    	},
+    	attributes : ['password']
+    }).then(result => {
+    	password = result.dataValues.password;
+    	if(bcrypt.compareSync(oldPass , password) == true)
+		 {	
+		 	callback(null,1);
+		 }
+		 else
+		 {
+		 	callback(null,0);
+		 }	    		
+    }).catch(err => {
+    	callback(err,null);
+    });
+}
+
+module.exports.changePasswordProcess = (data,callback) => {
+	var newPass 	= data.body.newPass; console.log(newPass);
+    var userId 		= data.user.id;
+    let saltRounds  = global.constant.saltRounds;			
+	var salt 		= bcrypt.genSaltSync(saltRounds);
+    var password 	= bcrypt.hashSync(newPass, salt);  console.log(password);
+    User.update(
+    	{
+    		password : password
+    	}, 
+    	{
+    		where : {id : userId}
+    }).then(result => {
+    	callback(null, 1);
+    	//console.log(result);
+    }).catch(err => {
+    	//console.log(err);
+    	callback(err, 0);
+    });
 }
